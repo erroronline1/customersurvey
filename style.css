@@ -1,0 +1,198 @@
+/* the calc-divisor should be number of sheets - 1,
+   additional sheets have to be added below */
+
+:root {
+	--sheets: 6
+}
+
+.position:nth-child(2) {
+	top: calc(0 * 100vh / var(--sheets));
+}
+
+.position:nth-child(4) {
+	top: calc(1 * 100vh / var(--sheets));
+}
+
+.position:nth-child(6) {
+	top: calc(2 * 100vh / var(--sheets));
+}
+
+.position:nth-child(8) {
+	top: calc(3 * 100vh / var(--sheets));
+}
+
+.position:nth-child(10) {
+	top: calc(4 * 100vh / var(--sheets));
+}
+
+.position:nth-child(12) {
+	top: calc(5 * 100vh / var(--sheets));
+}
+
+/* sheet-number-wise there should not be any changes necessary beyond this point */
+
+.position {
+	scroll-snap-align: initial;
+	position: sticky;
+	position: -webkit-sticky;
+	background: lightgreen;
+	width: 1vw;
+	height: calc(100vh / var(--sheets));
+	margin-left: -1vw;
+}
+
+
+* {
+	box-sizing: border-box;
+	transition: ease-in-out .1s;
+}
+
+html {
+	scroll-snap-type: mandatory;
+	scroll-snap-points-y: repeat(100vh);
+	scroll-snap-type: y mandatory;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: lighter;
+	font-size: min(4vh, 4vw);
+}
+
+body {
+	margin: 0 min(5vw, 5vh);
+}
+
+section {
+	scroll-snap-align: start;
+	height: 100vh;
+	position: relative;
+	padding: max(5vw, 10vh) 0;
+	text-align: center;
+}
+
+svg {
+	transform: scale(1, -1);
+	align-self: center;
+	width: 2rem;
+	height: 2rem;
+	position: relative;
+	cursor: pointer;
+	vertical-align: middle;
+	margin: 0 1rem;
+}
+
+input:checked+label::after {
+	position: absolute;
+	margin-top: -.5em;
+	margin-left: -1.5em;
+	content: 'x';
+	font-weight: bold;
+	color: grey;
+}
+
+.red {
+	fill: red;
+	stroke: red;
+}
+
+.yellow {
+	fill: orange;
+	stroke: orange;
+}
+
+.green {
+	fill: green;
+	stroke: green;
+}
+
+.pink {
+	fill: rgb(247, 166, 247);
+	stroke: rgb(247, 166, 247);
+}
+
+.grey {
+	fill: grey;
+	stroke: grey;
+}
+
+.activeshiftkey {
+	background-color: turquoise;
+}
+
+.big {
+	width: 6rem;
+	height: 6rem;
+	display: block;
+	margin: 0 auto;
+}
+
+@media (orientation:portrait) {
+	.big {
+		display: block
+	}
+}
+
+@media (orientation:landscape) {
+	.big {
+		display: inline-block
+	}
+}
+
+.nav_up {
+	position: absolute;
+	top: max(5vw, 5vh);
+	right: 0;
+	transform: rotate(90deg) scale(1.2);
+	margin: initial;
+}
+
+.nav_down {
+	position: absolute;
+	bottom: max(5vw, 5vh);
+	right: 0;
+	transform: rotate(-90deg) scale(1.2);
+	margin: initial;
+}
+
+.button,
+.key {
+	background: lightgrey;
+	margin: .5rem;
+	cursor: pointer;
+	vertical-align: middle;
+	height: 1.75rem;
+}
+
+.key,
+.spacekey {
+	display: inline-block;
+	width: 1.75rem;
+	margin: .1rem;
+}
+
+.keyrow {
+	display: block;
+}
+
+.spacekey {
+	width: 10rem;
+}
+
+.svgkey {
+	margin: 0;
+	width: 1rem;
+	height: 1rem;
+}
+
+h1 {
+	font-size: 1.5rem;
+	font-weight: inherit;
+}
+
+textarea {
+	font-family: 'Courier New', Courier, monospace;
+	width: 21rem;
+	height: 5rem;
+}
+
+input[type=radio] {
+	display: none
+}
