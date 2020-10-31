@@ -1,10 +1,10 @@
 // personal usecase framework by error on line 1 (erroronline.one)
 // this is not underscore.js!
 
-Array.prototype.contains = values => {
+Array.prototype.contains = function (values) {
 	return _.contains(this, values);
 } // to use intitive with arrays
-String.prototype.contains = values => {
+String.prototype.contains = function (values) {
 	return _.contains(this, values);
 } // to use intitive with string
 
@@ -17,26 +17,27 @@ const _ = {
 			values.some(value => obj.includes(value)) :
 			obj.includes(values);
 	},
-	ajax: { // use like _.ajax.request('GET'||'POST', 'ajax.php', {object});
+	ajax: { // use like _.ajax.request('GET'||'POST', 'ajax.php', {object}).then(callbackfunction,errorhandler);
 		xhr: new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP"),
 		request: function (method, destination, payload) {
-			method = method.toUpperCase();
-			let query = '',
-				response = false;
-			if (method == 'GET') {
-				Object.keys(payload).forEach((key, value) => {
-					query += '&' + key + '=' + value;
-				});
-			}
-			if ([0, 4].contains(this.xhr.readyState)) {
-				this.xhr.open(method, destination + '?cache=' + Math.round(Math.random() * 100000 + 1) + query, true);
-				this.xhr.setRequestHeader('Content-type', method == 'GET' ? 'application/x-www-form-urlencoded' : 'application/json');
-				this.xhr.onreadystatechange = function () {
-					response = ajax.xhr.readyState == 4 && ajax.xhr.status == 200 ? ajax.xhr.responseText : false;
+			var promiseObj = new Promise(function (resolve, reject) {
+				method = method.toUpperCase();
+				let query = '';
+				if (method == 'GET') {
+					Object.keys(payload).forEach(key => {
+						query += '&' + key + '=' + payload[key];
+					});
+				}
+				_.ajax.xhr.open(method, destination + '?cache=' + Math.round(Math.random() * 100000 + 1) + query, true);
+				_.ajax.xhr.send(method == 'GET' ? null : JSON.stringify(payload));
+				_.ajax.xhr.onreadystatechange = function () {
+					if (this.readyState === 4) {
+						if (this.status === 200) resolve(this.responseText);
+						else reject(false);
+					}
 				};
-				this.xhr.send(method == 'GET' ? null : JSON.stringify(payload));
-			}
-			return response;
+			});
+			return promiseObj;
 		},
 	},
 	insertChars: function (characters, input) { // fills or deletes text on cursor position (textareas or inputs) 
