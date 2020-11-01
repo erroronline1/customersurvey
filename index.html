@@ -36,6 +36,7 @@
 			<div class="button" onclick="jump(global.sheets-2)"><svg class="svgkey">
 					<use href="#svg_sign-out" /></svg> nein danke</div>
 		</p>
+
 		<svg class="nav_up grey" onclick="jump(-1)">
 			<use href="#svg_navigation" /></svg>
 		<svg class="nav_down grey" onclick="jump(1)">
@@ -80,7 +81,6 @@
 			<input type="radio" name="query4" value="0" id="query40" /><label for="query40"> <svg class="red">
 					<use href="#svg_frown" /></svg></label>
 		</p>
-
 
 		<svg class="nav_up grey" onclick="jump(-1)">
 			<use href="#svg_navigation" /></svg>
@@ -137,10 +137,10 @@
 
 		<svg class="nav_up grey" onclick="jump(-1)">
 			<use href="#svg_navigation" /></svg>
-		<svg class="nav_down grey" onclick="window.location.href=location.href;">
-			<use href="#svg_reload" /></svg>
+		<svg class="nav_down grey" onclick="window.setTimeout(()=>{window.location.href=location.href;},1000)">
+			<use href="#svg_reload" /></svg><!-- 1s timeout to make sure saving possible entries -->
 	</section>
-	<!-- adding sections has to be taken into account on defining the css .position-class and js sheet number constant
+	<!-- adding sections has to be taken into account on defining the css .position-class.
 		jump-buttons always jump relative steps. after finishing any scroll event all inputs are supposed to be stored via ajax-call.
 	-->
 	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
