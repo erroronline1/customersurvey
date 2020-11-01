@@ -33,7 +33,7 @@ const _ = {
 				_.ajax.xhr.onreadystatechange = function () {
 					if (this.readyState === 4) {
 						if (this.status === 200) resolve(this.responseText);
-						else reject(false);
+						else reject(this.status);
 					}
 				};
 			});
