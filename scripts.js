@@ -1,35 +1,56 @@
-const sheets = 7, // actual number of sheets
-	reload = 0; //seconds
-let text1keyboard, text2keyboard, text3keyboard; // define possible keyboards for text input
-
-
-let currentID; 
+const global = {
+	restart: 0, // seconds to restart, 0 disables
+	sheets: null // actual number of sheets will be set with init function
+};
+let text1keyboard, text2keyboard, text3keyboard; // initiate possible keyboards for text input
 
 function jump(steps) { // scroll to relative sheet 
 	let sheet = document.getElementsByTagName('section');
 	window.scrollBy({
-		top: steps * (1 + 1 / (sheets - 1)) * sheet[0].clientHeight,
+		top: steps * (1 + 1 / (global.sheets - 1)) * sheet[0].clientHeight,
 		behavior: 'smooth'
 	});
 }
 
-function save() { // process inputs and textareas and transfer to api by ajax-call
-	let payload = {};
-	// input radio button handler	
-	let inputs = document.getElementsByTagName('input');
-	Object.keys(inputs).forEach(element => {
-		if (inputs[element].checked) {
-			payload[inputs[element].name] = inputs[element].value;
+let api = {
+	url: 'http://localhost/customersurvey/api.php',
+	currentId: null,
+	getInputs: function () {
+		let payload = {};
+		if (this.currentId) payload.id = this.currentId;
+		// input radio button handler	
+		let inputs = document.getElementsByTagName('input');
+		Object.keys(inputs).forEach(element => {
+			if (inputs[element].checked) {
+				payload[inputs[element].name] = inputs[element].value;
+			}
+		});
+		// textarea value handler
+		inputs = document.getElementsByTagName('textarea');
+		Object.keys(inputs).forEach(element => {
+			if (inputs[element].value) {
+				payload[inputs[element].name] = encodeURI(inputs[element].value.replace(/^\s+/, '').replace(/\s+$/, ''));
+			}
+		});
+		return payload;
+	},
+	save: function () { // process inputs and textareas and transfer to api by ajax-call
+		// make server request and await result
+		let payload = this.getInputs();
+		if (Object.keys(payload).length) {
+			var d = new Date();
+			var n = d.getTime();
+			console.log('request sent', n);
+			_.ajax.request('post', api.url, payload).then(api.save_result, api.error);
 		}
-	});
-	// textarea value handler
-	inputs = document.getElementsByTagName('textarea');
-	Object.keys(inputs).forEach(element => {
-		if (inputs[element].value) {
-			payload[inputs[element].name] = encodeURI(inputs[element].value.replace(/^\s+/, '').replace(/\s+$/, ''));
-		}
-	});
-//	console.log(payload);
+	},
+	error: function (error) {
+		console.log('ajax error, server responded: ' + error);
+	},
+	save_result: function (payload) {
+		api.currentId = payload; // this.currentId doesn't work, maybe because this is used as a callback function?
+		console.log(api.currentId);
+	}
 }
 
 class jskeyboard { // construct a keyboard and handle key-presses
@@ -134,32 +155,28 @@ class jskeyboard { // construct a keyboard and handle key-presses
 	}
 }
 
-function idleLogout() { // reload entire survey after timeout unless some interaction is detected
-	var t;
+function restart() { // restart entire survey after timeout unless some interaction is detected
+	let t;
 	window.onfocus = window.onmousemove = window.onmousedown = window.onclick = window.onscroll = window.onkeypress = resetTimer;
 
 	function resetTimer() {
-		clearTimeout(t);
-		t = setTimeout(() => {
-			window.location.href = 'index.html';
-		}, reload * 1000);
+		window.clearTimeout(t);
+		if (Object.keys(api.getInputs()).length || window.scrollY > 256) // restart only if filled form or not on first page 
+			t = window.setTimeout(() => {
+				window.location.href = 'index.html';
+			}, global.restart * 1000);
 	}
 }
-if (reload) idleLogout();
 
-/*!
- * Run a callback function after scrolling has stopped
- * (c) 2017 Chris Ferdinandi, MIT License, https://gomakethings.com
- * @param  {Function} callback The function to run after scrolling
- */
-const scrollStop = callback => {
-	if (!callback || typeof callback !== 'function') return; // Make sure a valid callback was provided
-	let isScrolling; // Setup scrolling variable
-	window.addEventListener('scroll', event => { // Listen for scroll events
-		window.clearTimeout(isScrolling); // Clear our timeout throughout the scroll
-		isScrolling = setTimeout(() => {
-			callback();
-		}, 100); // Set a timeout to run after scrolling ends
-	});
-};
-scrollStop(save);
+let scrollHandler; // initiate ajax storage request after scrolling stops
+window.addEventListener('scroll', event => {
+	window.clearTimeout(scrollHandler);
+	scrollHandler = setTimeout(() => {
+		api.save();
+	}, 512); // less than that results in more than one requests messing up the database and id-handling
+});
+
+function init() {
+	global.sheets = Object.keys(document.getElementsByTagName('section')).length;
+	if (global.restart) restart();
+}
