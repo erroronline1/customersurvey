@@ -1,35 +1,12 @@
-/* the calc-divisor should be number of sheets - 1,
-   additional sheets have to be added below */
+/*
+:root { --sheets: ; will be set dynamically with javascript during initialization }
+--sheet-index will be set inline on every affected element
 
-:root {
-	--sheets: 6
+*/
+
+.position:nth-of-type(1n) {
+	top: calc((var(--sheet-index) - 1) * 100vh / var(--sheets));
 }
-
-.position:nth-child(2) {
-	top: calc(0 * 100vh / var(--sheets));
-}
-
-.position:nth-child(4) {
-	top: calc(1 * 100vh / var(--sheets));
-}
-
-.position:nth-child(6) {
-	top: calc(2 * 100vh / var(--sheets));
-}
-
-.position:nth-child(8) {
-	top: calc(3 * 100vh / var(--sheets));
-}
-
-.position:nth-child(10) {
-	top: calc(4 * 100vh / var(--sheets));
-}
-
-.position:nth-child(12) {
-	top: calc(5 * 100vh / var(--sheets));
-}
-
-/* sheet-number-wise there should not be any changes necessary beyond this point */
 
 .position {
 	scroll-snap-align: initial;

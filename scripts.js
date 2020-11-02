@@ -178,5 +178,6 @@ window.addEventListener('scroll', event => {
 
 function init() {
 	global.sheets = Object.keys(document.getElementsByTagName('section')).length;
+	document.documentElement.style.setProperty('--sheets', global.sheets - 1);
 	if (global.restart) restart();
 }

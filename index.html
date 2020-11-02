@@ -26,7 +26,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="#svg_navigation" /></svg>
 	</section>
-	<div class="position"></div>
+	<div class="position" style="--sheet-index:1;"></div>
 	<section>
 		<h1>Danke für Ihre Meinung!</h1>
 		<p>Wir freuen uns, wenn Sie noch einen kleinen Moment Zeit für uns haben. Beantworten Sie uns noch ein paar
@@ -42,7 +42,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="#svg_navigation" /></svg>
 	</section>
-	<div class="position"></div>
+	<div class="position" style="--sheet-index:2;"></div>
 	<section>
 		<h1>Wie empfanden Sie die Versorgung mit Ihrem Hilfsmittel?</h1>
 
@@ -87,7 +87,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="#svg_navigation" /></svg>
 	</section>
-	<div class="position"></div>
+	<div class="position" style="--sheet-index:3;"></div>
 	<section>
 		<h1>Was hat Ihnen gefallen?</h1>
 		<p><textarea name="text1" id="text1"
@@ -101,7 +101,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="#svg_navigation" /></svg>
 	</section>
-	<div class="position"></div>
+	<div class="position" style="--sheet-index:4;"></div>
 	<section>
 		<h1>Was können wir besser machen?</h1>
 		<p><textarea name="text2" id="text2"
@@ -115,7 +115,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="#svg_navigation" /></svg>
 	</section>
-	<div class="position"></div>
+	<div class="position" style="--sheet-index:5;"></div>
 	<section>
 		<h1>Welches Hilfsmittel haben Sie von uns erhalten?</h1>
 		<p><textarea name="text3" id="text3"
@@ -129,7 +129,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="#svg_navigation" /></svg>
 	</section>
-	<div class="position"></div>
+	<div class="position" style="--sheet-index:6;"></div>
 	<section>
 		<h1>Vielen Dank für Ihre Zeit!</h1>
 		<svg class="big pink">
@@ -140,7 +140,12 @@
 		<svg class="nav_down grey" onclick="window.setTimeout(()=>{window.location.href=location.href;},1000)">
 			<use href="#svg_reload" /></svg><!-- 1s timeout to make sure saving possible entries -->
 	</section>
-	<!-- adding sections has to be taken into account on defining the css .position-class.
+	<!-- 
+		adding sections has to follow the same scheme
+		
+		<div class="position" style="--sheet-index:6;"></div> count inline css-variable up
+		<section> contains the actual content </section>
+
 		jump-buttons always jump relative steps. after finishing any scroll event all inputs are supposed to be stored via ajax-call.
 	-->
 	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
