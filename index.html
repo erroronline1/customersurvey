@@ -91,7 +91,7 @@
 	<section>
 		<h1>Was hat Ihnen gefallen?</h1>
 		<p><textarea name="text1" id="text1"
-				onfocus="var keyboard='text1keyboard'; if (!_.el(keyboard).hasChildNodes()) text1keyboard = new jskeyboard(this, _.el(keyboard));"></textarea>
+				onfocus="initjskeyboard('text1keyboard', this);"></textarea>
 		</p>
 		<div id="text1keyboard"></div>
 		<!--this div has to have the same name as the aforedeclared class name-->
@@ -105,7 +105,7 @@
 	<section>
 		<h1>Was können wir besser machen?</h1>
 		<p><textarea name="text2" id="text2"
-				onfocus="var keyboard='text2keyboard'; if (!_.el(keyboard).hasChildNodes()) text2keyboard = new jskeyboard(this, _.el(keyboard));"></textarea>
+				onfocus="initjskeyboard('text2keyboard', this);"></textarea>
 		</p>
 		<div id="text2keyboard"></div>
 		<!--this div has to have the same name as the aforedeclared class name-->
@@ -119,7 +119,7 @@
 	<section>
 		<h1>Welches Hilfsmittel haben Sie von uns erhalten?</h1>
 		<p><textarea name="text3" id="text3"
-				onfocus="var keyboard='text3keyboard'; if (!_.el(keyboard).hasChildNodes()) text3keyboard = new jskeyboard(this, _.el(keyboard));"></textarea>
+				onfocus="initjskeyboard('text3keyboard', this);"></textarea>
 		</p>
 		<div id="text3keyboard"></div>
 		<!--this div has to have the same name as the aforedeclared class name-->

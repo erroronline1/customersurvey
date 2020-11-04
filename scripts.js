@@ -2,7 +2,6 @@ const global = {
 	restart: 0, // seconds to restart, 0 disables
 	sheets: null // actual number of sheets will be set with init function
 };
-let text1keyboard, text2keyboard, text3keyboard; // initiate possible keyboards for text input
 
 function jump(steps) { // scroll to relative sheet 
 	let sheet = document.getElementsByTagName('section');
@@ -38,19 +37,22 @@ let api = {
 		// make server request and await result
 		let payload = this.getInputs();
 		if (Object.keys(payload).length) {
-			var d = new Date();
-			var n = d.getTime();
-			console.log('request sent', n);
-			_.ajax.request('post', api.url, payload).then(api.save_result, api.error);
+			console.log('request sent', Date.now());
+			_.ajax.request('post', api.url, payload).then(api.saveResult, api.error);
 		}
+	},
+	saveResult: function (payload) {
+		api.currentId = payload; // this.currentId doesn't work, maybe because this is used as a callback function?
+		console.log('current id: ' + api.currentId);
 	},
 	error: function (error) {
 		console.log('ajax error, server responded: ' + error);
-	},
-	save_result: function (payload) {
-		api.currentId = payload; // this.currentId doesn't work, maybe because this is used as a callback function?
-		console.log(api.currentId);
 	}
+}
+
+function initjskeyboard(identifier, target){ //initiates the keyboard and assigns to target-input
+	if (!_.el(identifier).hasChildNodes()) window[identifier] = new jskeyboard(target, _.el(identifier));
+	//window.whatever defines global variables outside of a functions scope
 }
 
 class jskeyboard { // construct a keyboard and handle key-presses
