@@ -1,23 +1,10 @@
-/*
-:root { --sheets: ; will be set dynamically with javascript during initialization }
---sheet-index will be set inline on every affected element
-
-*/
-
-.position:nth-of-type(1n) {
-	top: calc((var(--sheet-index) - 1) * 100vh / var(--sheets));
+:root {
+	/* --sheets: ; will be set dynamically with javascript during initialization */
+	--global-margin-top: min(8vw, 8vh);
+	--global-margin-right: min(8vw, 8vh);
+	--global-margin-bottom: min(8vw, 8vh);
+	--global-margin-left: min(8vw, 8vh);
 }
-
-.position {
-	scroll-snap-align: initial;
-	position: sticky;
-	position: -webkit-sticky;
-	background: lightgreen;
-	width: 1vw;
-	height: calc(100vh / var(--sheets));
-	margin-left: -1vw;
-}
-
 
 * {
 	box-sizing: border-box;
@@ -34,35 +21,68 @@ html {
 }
 
 body {
-	margin: 0 min(5vw, 5vh);
+	margin-right: var(--global-margin-right);
+	margin-left: var(--global-margin-left);
+}
+
+/* --sheet-index will be set inline on every affected element */
+.position:nth-of-type(1n) {
+	top: calc((var(--sheet-index) - 1) * 100vh / var(--sheets));
+}
+
+.position {
+	scroll-snap-align: initial;
+	position: sticky;
+	position: -webkit-sticky;
+	background: lightgreen;
+	width: 1vw;
+	height: calc(100vh / var(--sheets));
+	margin-left: -1vw;
 }
 
 section {
 	scroll-snap-align: start;
 	height: 100vh;
 	position: relative;
-	padding: max(5vw, 10vh) 0;
+	padding-top: calc(2 * var(--global-margin-top));
+	padding-bottom: calc(2 * var(--global-margin-bottom));
 	text-align: center;
 }
 
 svg {
 	transform: scale(1, -1);
 	align-self: center;
-	width: 2rem;
-	height: 2rem;
+	width: 2em;
+	height: 2em;
 	position: relative;
 	cursor: pointer;
 	vertical-align: middle;
-	margin: 0 1rem;
+	margin: 0 1em;
 }
 
 input:checked+label::after {
 	position: absolute;
 	margin-top: -.5em;
-	margin-left: -1.5em;
+	margin-left: -.9em;
 	content: 'x';
-	font-weight: bold;
 	color: grey;
+	font-size: 1.5em;
+}
+
+@media (orientation:portrait) {
+	input:checked+label[big]::after {
+		margin-top: -2em;
+		margin-left: .4em;
+		font-size: 4em;
+	}
+}
+
+@media (orientation:landscape) {
+	input:checked+label[big]::after {
+		margin-top: -.5em;
+		margin-left: -.35em;
+		font-size: 4em;
+	}
 }
 
 .red {
@@ -95,8 +115,8 @@ input:checked+label::after {
 }
 
 .big {
-	width: 6rem;
-	height: 6rem;
+	width: 6em;
+	height: 6em;
 	display: block;
 	margin: 0 auto;
 }
@@ -115,7 +135,7 @@ input:checked+label::after {
 
 .nav_up {
 	position: absolute;
-	top: max(5vw, 5vh);
+	top: var(--global-margin-top);
 	right: 0;
 	transform: rotate(90deg) scale(1.2);
 	margin: initial;
@@ -123,7 +143,7 @@ input:checked+label::after {
 
 .nav_down {
 	position: absolute;
-	bottom: max(5vw, 5vh);
+	bottom: var(--global-margin-bottom);
 	right: 0;
 	transform: rotate(-90deg) scale(1.2);
 	margin: initial;
@@ -132,17 +152,17 @@ input:checked+label::after {
 .button,
 .key {
 	background: lightgrey;
-	margin: .5rem;
+	margin: .5em;
 	cursor: pointer;
 	vertical-align: middle;
-	height: 1.75rem;
+	height: 1.75em;
 }
 
 .key,
 .spacekey {
 	display: inline-block;
-	width: 1.75rem;
-	margin: .1rem;
+	width: 1.5em;
+	margin: 0.075em;
 }
 
 .keyrow {
@@ -150,24 +170,24 @@ input:checked+label::after {
 }
 
 .spacekey {
-	width: 10rem;
+	width: 9.75em;
 }
 
 .svgkey {
 	margin: 0;
-	width: 1rem;
-	height: 1rem;
+	width: 1em;
+	height: 1em;
 }
 
 h1 {
-	font-size: 1.5rem;
+	font-size: 1.5em;
 	font-weight: inherit;
 }
 
 textarea {
 	font-family: 'Courier New', Courier, monospace;
-	width: 21rem;
-	height: 5rem;
+	width: 21em;
+	height: 5em;
 }
 
 input[type=radio] {
