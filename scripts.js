@@ -37,8 +37,9 @@ let api = {
 		// make server request and await result
 		let payload = this.getInputs();
 		if (Object.keys(payload).length) {
-			console.log('request sent', Date.now());
-			_.ajax.request('post', api.url, payload).then(api.saveResult, api.error);
+			let method = (this.currentId !== null) ? 'PUT' : 'POST';
+			_.ajax.request(method, api.url, payload).then(api.saveResult, api.error);
+			console.log(method + ' request sent', Date.now());
 		}
 	},
 	saveResult: function (payload) {
@@ -50,7 +51,7 @@ let api = {
 	}
 }
 
-function initjskeyboard(identifier, target){ //initiates the keyboard and assigns to target-input
+function initjskeyboard(identifier, target) { //initiates the keyboard and assigns to target-input
 	if (!_.el(identifier).hasChildNodes()) window[identifier] = new jskeyboard(target, _.el(identifier));
 	//window.whatever defines global variables outside of a functions scope
 }
