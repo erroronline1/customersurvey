@@ -13,7 +13,7 @@ function jump(steps) { // scroll to relative sheet
 }
 
 let api = {
-	url: 'http://localhost/customersurvey/api.php',
+	url: 'http://localhost/customersurvey/ressources/api.php',
 	currentId: null,
 	getInputs: function () {
 		let payload = {};
@@ -89,7 +89,7 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		key.className = 'key';
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		use.setAttribute('href', '#svg_arrow-up');
+		use.setAttribute('href', 'ressources/sprite.svg#svg_arrow-up');
 		svg.appendChild(use);
 		svg.setAttribute('class', 'svgkey');
 		svg.setAttribute('id', parent.id + 'shiftkey');
@@ -113,7 +113,7 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		key.className = 'key';
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		use.setAttribute('href', '#svg_backspace');
+		use.setAttribute('href', 'ressources/sprite.svg#svg_backspace');
 		svg.appendChild(use);
 		svg.setAttribute('class', 'svgkey');
 		key.appendChild(svg);
@@ -127,7 +127,7 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		key.className = 'key';
 		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		use.setAttribute('href', '#svg_enter');
+		use.setAttribute('href', 'ressources/sprite.svg#svg_enter');
 		svg.appendChild(use);
 		svg.setAttribute('class', 'svgkey');
 		key.appendChild(svg);
