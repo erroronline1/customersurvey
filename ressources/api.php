@@ -2,10 +2,8 @@
 ini_set('display_errors', 1); error_reporting(E_ERROR);
 header('Content-type: text/html; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
-include('dbconnect.php');
-
 //database connection
-$mysqli = mysqli_connect($db[0]['Server'], $db[0]['User'], $db[0]['Password'], $db[0]['Name']); if (mysqli_connect_errno($mysqli)) echo "Failed to connect to MySQL: ".mysqli_connect_error();
+include('dbconnect.php');
 
 // read incoming stream
 $payload = json_decode(file_get_contents("php://input"));
