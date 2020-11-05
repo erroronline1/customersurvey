@@ -1,6 +1,7 @@
 const global = {
 	restart: 0, // seconds to restart, 0 disables
-	sheets: null // actual number of sheets will be set with init function
+	sheets: null, // actual number of sheets will be set with init function
+	report: undefined // scripts behaviour if survey or report
 };
 
 function jump(steps) { // scroll to relative sheet 
@@ -173,14 +174,15 @@ function restart() { // restart entire survey after timeout unless some interact
 
 let scrollHandler; // initiate ajax storage request after scrolling stops
 window.addEventListener('scroll', event => {
-	window.clearTimeout(scrollHandler);
+	if (global.report == undefined) window.clearTimeout(scrollHandler);
 	scrollHandler = setTimeout(() => {
 		api.save();
 	}, 512); // less than that results in more than one requests messing up the database and id-handling
 });
 
-function init() {
+function init(report) {
+	global.report = report;
 	global.sheets = Object.keys(document.getElementsByTagName('section')).length;
 	document.documentElement.style.setProperty('--sheets', global.sheets - 1);
-	if (global.restart) restart();
+	if (global.restart && global.report == undefined) restart();
 }
