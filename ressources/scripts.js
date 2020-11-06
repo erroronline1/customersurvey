@@ -91,7 +91,6 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
 		use.setAttribute('href', 'ressources/sprite.svg#svg_arrow-up');
 		svg.appendChild(use);
-		svg.setAttribute('class', 'svgkey');
 		svg.setAttribute('id', parent.id + 'shiftkey');
 		key.appendChild(svg);
 		key.onclick = function () {
@@ -115,7 +114,6 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
 		use.setAttribute('href', 'ressources/sprite.svg#svg_backspace');
 		svg.appendChild(use);
-		svg.setAttribute('class', 'svgkey');
 		key.appendChild(svg);
 		key.onclick = function () {
 			eval(parent.id + '.insertChars(\'\\b\')');
@@ -129,7 +127,6 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
 		use.setAttribute('href', 'ressources/sprite.svg#svg_enter');
 		svg.appendChild(use);
-		svg.setAttribute('class', 'svgkey');
 		key.appendChild(svg);
 		key.onclick = function () {
 			eval(parent.id + '.insertChars(\'\\n\')');

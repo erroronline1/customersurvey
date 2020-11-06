@@ -111,7 +111,7 @@ input:checked+label::after {
 }
 
 .activeshiftkey {
-	background-color: turquoise;
+	background-color: turquoise !important;
 }
 
 .big {
@@ -149,6 +149,11 @@ input:checked+label::after {
 	margin: initial;
 }
 
+a {
+	display: block;
+}
+
+a,
 .button,
 .key {
 	background: lightgrey;
@@ -156,6 +161,8 @@ input:checked+label::after {
 	cursor: pointer;
 	vertical-align: middle;
 	height: 1.75em;
+	text-decoration: none;
+	color: inherit;
 }
 
 .key,
@@ -173,7 +180,9 @@ input:checked+label::after {
 	width: 9.75em;
 }
 
-.svgkey {
+a>svg,
+div[class=button]>svg,
+div[class=key]>svg {
 	margin: 0;
 	width: 1em;
 	height: 1em;
