@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>customer survey - REPORT</title>
+	<link rel="stylesheet" href="ressources/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="ressources/erroronline1.js"></script>
+	<script src="ressources/scripts.js"></script>
+</head>
+
+<body>
+	<section>
+		<h1>Export</h1>
+		<p>
+			<a href="ressources/export.php?type=rtf" target="dump"><svg>
+					<use href="ressources/sprite.svg#svg_document"></use>
+				</svg> RTF-Bericht</a>
+			<a href="ressources/export.php?type=csv" target="dump"><svg>
+					<use href="ressources/sprite.svg#svg_table"></use>
+				</svg> CSV-Datei der Befragung anfordern</a>
+			<a href="ressources/export.php?type=sql" target="dump"><svg>
+					<use href="ressources/sprite.svg#svg_database"></use>
+				</svg> SQL-Datei des Systems anfordern (Datenbank-Backup)</a><br />
+		</p>
+		<svg class="nav_down grey" onclick="jump(1)">
+			<use href="ressources/sprite.svg#svg_navigation" /></svg>
+	</section>
+	<div class="position" style="--sheet-index:1;"></div>
+	<section>
+		<h1>Reset Database</h1>
+		<div class="button" onclick="var pw='';"><svg>
+				<use href="ressources/sprite.svg#svg_bin"></use>
+			</svg> Datenbank unwiderruflich löschen</div>
+
+		<svg class="nav_up grey" onclick="jump(-1)">
+			<use href="ressources/sprite.svg#svg_navigation" /></svg>
+		<svg class="nav_down grey" onclick="jump(1)">
+			<use href="ressources/sprite.svg#svg_navigation" /></svg>
+	</section>
+	<section>
+		<h1>Info</h1>
+		<p>customer survey by error on line 1 (erroronline.one)<br />
+			<br />
+			visit code at <a href="https://github.com/erroronline1/customersurvey">https://github.com/erroronline1/customersurvey</a><br />
+			<a href="readme.md">readme.md</a><br />
+			<svg class="nav_up grey" onclick="jump(-1)">
+				<use href="ressources/sprite.svg#svg_navigation" /></svg>
+	</section>
+	<!-- 
+		adding sections has to follow the same scheme
+		
+		<div class="position" style="--sheet-index:6;"></div> count inline css-variable up
+		<section> contains the actual content </section>
+
+		jump-buttons always jump relative steps. after finishing any scroll event all inputs are supposed to be stored via ajax-call.
+	-->
+	<script>
+		init(1);
+	</script>
+</body>
+
+</html>
