@@ -203,3 +203,20 @@ textarea {
 input[type=radio] {
 	display: none
 }
+
+#growlNotif {
+	border: lightgrey;
+	background-color: dimgrey;
+	color: white;
+	box-shadow: .1em .1em .3em 0em grey;
+	position:fixed;
+	z-index:2;
+	font-size: 1rem;
+	padding:1em;
+	width:15em;
+	bottom:	var(--global-margin-bottom);
+	right: calc(-1 * (15em + var(--global-margin-right)));
+}
+#growlNotif.show{
+	right:	var(--global-margin-right);
+}

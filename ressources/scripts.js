@@ -59,10 +59,10 @@ let api = {
 		}
 	},
 	deleteResult: function (payload) {
-		alert('table was successfully erased');
+		growlNotif('table was successfully erased');
 	},
 	error: function (error) {
-		console.log('ajax error, server responded: ' + error);
+		growlNotif('ajax error, server responded: ' + error);
 	}
 }
 
@@ -196,4 +196,13 @@ function init(report) {
 	global.sheets = Object.keys(document.getElementsByTagName('section')).length;
 	document.documentElement.style.setProperty('--sheets', global.sheets - 1);
 	if (global.restart && global.report == undefined) restart();
+}
+
+function growlNotif (text) { // short popups for status information
+	if (typeof text !== 'undefined') {
+		_.el('growlNotif').innerHTML = text;
+		_.el('growlNotif').classList.add('show');
+		window.setTimeout(growlNotif, 3000);
+	}
+	else _.el('growlNotif').classList.remove('show');
 }
