@@ -160,7 +160,7 @@ a,
 	margin: .5em;
 	cursor: pointer;
 	vertical-align: middle;
-	height: 1.75em;
+	min-height: 1.75em;
 	text-decoration: none;
 	color: inherit;
 }
@@ -195,7 +195,8 @@ h1 {
 
 textarea {
 	font-family: 'Courier New', Courier, monospace;
-	width: 21em;
+	width: 88%;
+	max-width: 31em;
 	height: 5em;
 }
 
