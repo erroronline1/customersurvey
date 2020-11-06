@@ -1,5 +1,5 @@
 <?php
-$db[0]=[
+const DB = [
 	'server' => '127.0.0.1', // or localhost whatever runs more smoothly
 	'user' => 'root',
 	'password' => '**********',
@@ -12,5 +12,6 @@ $db[0]=[
 ];
 
 const PERIOD = 365 * 2;
-$mysqli = mysqli_connect($db[0]['server'], $db[0]['user'], $db[0]['password'], $db[0]['name']); if (mysqli_connect_errno($mysqli)) echo "Failed to connect to MySQL: ".mysqli_connect_error();
+const CONFIRM_DELETION = '**********';
+$mysqli = mysqli_connect(DB['server'], DB['user'], DB['password'], DB['name']); if (mysqli_connect_errno($mysqli)) echo "Failed to connect to MySQL: ".mysqli_connect_error();
 ?>
