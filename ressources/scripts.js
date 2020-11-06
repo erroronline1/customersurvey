@@ -47,6 +47,20 @@ let api = {
 		api.currentId = payload; // this.currentId doesn't work, maybe because this is used as a callback function?
 		console.log('current id: ' + api.currentId);
 	},
+	delete: function () {
+		let confirm = prompt('enter confirmation to permanently delete all entries: ');
+		if (confirm !== null) {
+			let method = 'DELETE',
+				payload = {
+					'confirm': confirm
+				};
+			_.ajax.request(method, api.url, payload).then(api.deleteResult, api.error);
+			console.log(method + ' request sent', Date.now());
+		}
+	},
+	deleteResult: function (payload) {
+		alert('table was successfully erased');
+	},
 	error: function (error) {
 		console.log('ajax error, server responded: ' + error);
 	}

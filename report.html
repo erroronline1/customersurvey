@@ -30,7 +30,7 @@
 	<div class="position" style="--sheet-index:1;"></div>
 	<section>
 		<h1>Reset Database</h1>
-		<div class="button" onclick="var pw='';"><svg>
+		<div class="button" onclick="api.delete()"><svg>
 				<use href="ressources/sprite.svg#svg_bin"></use>
 			</svg> Datenbank unwiderruflich löschen</div>
 
@@ -39,6 +39,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="ressources/sprite.svg#svg_navigation" /></svg>
 	</section>
+	<div class="position" style="--sheet-index:2;"></div>
 	<section>
 		<h1>Info</h1>
 		<p>customer survey by error on line 1 (erroronline.one)<br />
@@ -54,7 +55,7 @@
 		<div class="position" style="--sheet-index:6;"></div> count inline css-variable up
 		<section> contains the actual content </section>
 
-		jump-buttons always jump relative steps. after finishing any scroll event all inputs are supposed to be stored via ajax-call.
+		jump-buttons always jump relative steps.
 	-->
 	<script>
 		init(1);
