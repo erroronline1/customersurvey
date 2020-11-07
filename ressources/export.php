@@ -38,13 +38,13 @@ elseif ($_GET['type'] == 'csv'){
 	$values = "";
 	while ($save = $t_save->fetch_assoc()){
 		foreach($save as $key => $value){
-			if ($fieldnames < 1){ $fields .= $key . ";";} //headers
-			else $values .= preg_replace("/\n|\r\n/", " ", utf8_decode(addslashes($value))) . ";";
+			if ($fieldnames < 1) $fields .= $key . ";"; //headers
+			$values .= preg_replace("/\n|\r\n/", " ", utf8_decode(addslashes($value))) . ";";
 		}
 		$values .= "\n";
 		$fieldnames++;
 	}
-	$output .= substr($fields, 0, -1);
+	$output .= substr($fields, 0, -1) . "\r\n";
 	if ($values) $output .= substr($values, 0, -1);
 	$filename = "customer_survey_raw_data_";
 }
