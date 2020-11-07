@@ -168,3 +168,14 @@ this file creates image streams to depict the votes in a graph with daily and ov
 ## dbconnect.php
 
 the database-parameters are set here, database connection is initiated and a few constants are declared for customization. this file is included in every other php-file.
+
+
+# summary
+
+i am well aware that there might be simpler solutions. but i am a vanilla guy and dont trust frameworks that are not my own. also i am currently neither capable of nor willing to use node, npm or any other tool to mAke NaTiVe ApPs UsInG HtMl AnD jAvAsCrIpT. and i somehow don't find the nerve to properly learn tkinter, kivy and alike.
+
+in this scenario customization does not take place on only one site (admin-interface or single config file), but at least where it should be:
+* content within html
+* styling in css
+* behaviour in javascript
+* database interaction and dynamic file generation within php
