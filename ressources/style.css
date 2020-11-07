@@ -182,7 +182,8 @@ a,
 
 a>svg,
 div[class=button]>svg,
-div[class=key]>svg {
+div[class=key]>svg,
+div[class="key activeshiftkey"]>svg {
 	margin: 0;
 	width: 1em;
 	height: 1em;
