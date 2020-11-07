@@ -1,5 +1,5 @@
 const global = {
-	restart: 0, // seconds to restart, 0 disables
+	restart: 20, // seconds to restart, 0 disables
 	sheets: null, // actual number of sheets will be set with init function
 	report: undefined // scripts behaviour if survey or report
 };
@@ -171,24 +171,31 @@ class jskeyboard { // construct a keyboard and handle key-presses
 }
 
 function restart() { // restart entire survey after timeout unless some interaction is detected
-	let t;
-	window.onfocus = window.onmousemove = window.onmousedown = window.onclick = window.onscroll = window.onkeypress = resetTimer;
+	if (global.report == undefined) {
+		let t;
+		window.onfocus = window.onmousemove = window.onmousedown = window.onclick = window.onscroll = window.onkeypress = resetTimer;
 
-	function resetTimer() {
-		window.clearTimeout(t);
-		if (Object.keys(api.getInputs()).length || window.scrollY > 256) // restart only if filled form or not on first page 
-			t = window.setTimeout(() => {
-				window.location.href = 'index.html';
-			}, global.restart * 1000);
+		function resetTimer() {
+			window.clearTimeout(t);
+			if (Object.keys(api.getInputs()).length || window.scrollY > 256) // restart only if filled form or not on first page 
+				t = window.setTimeout(() => {
+					api.save();
+					window.setTimeout(() => { // give a litte time to store just in case
+						window.location.href = 'index.html';
+					}, 512);
+				}, global.restart * 1000);
+		}
 	}
 }
 
 let scrollHandler; // initiate ajax storage request after scrolling stops
 window.addEventListener('scroll', event => {
-	if (global.report == undefined) window.clearTimeout(scrollHandler);
-	scrollHandler = setTimeout(() => {
-		api.save();
-	}, 512); // less than that results in more than one requests messing up the database and id-handling
+	if (global.report == undefined) {
+		window.clearTimeout(scrollHandler);
+		scrollHandler = setTimeout(() => {
+			api.save();
+		}, 512); // less than that results in more than one requests messing up the database and id-handling
+	}
 });
 
 function init(report) {
