@@ -6,7 +6,7 @@ free as in *"put in your own effort and install a wamp- or lamp-server with mysq
 a previous version had a backend to add or change questions, timings and other environment variables, but i decided to omit these because i did not change any of these within the timespan of three years anyway.
 
 there are some legacy remainders within this project. the earlier version had html, js and php all mixed up. database-column-names are based on the previous setup though. don't mind that.
-so this is by all means not an all purpose solution, more an accomodation to actual needs as well as one of my first attempts to gain best practices and wisely separate the functional groups into frontend, functional js and database api with clearly structures responses instead of returning evaluation js-commands parsing html with a lot of escaped quotes.
+so this is by all means not an all purpose solution, more an accomodation to actual needs as well as one of my first attempts to gain best practices and wisely separate the functional groups into frontend, functional js and database api with clearly structured responses instead of returning evaluation js-commands parsing html with a lot of escaped quotes.
 
 questions are set up directly in the index.html-file and absolutely depending on the database-structure. so if you want to adapt this please make it properly.
 
@@ -34,20 +34,20 @@ the svg-images with the onclick-properties are navigation helpers to support and
 direct supported items for the content are:
 ```html
 <input type="radio" name="query1" value="2" id="query12" /><label for="query12"> <svg class="green">
-        <use href="#svg_smile" /></svg></label>
+    <use href="#svg_smile" /></svg></label>
 <input type="radio" name="query1" value="1" id="query11" /><label for="query11"> <svg class="yellow">
-        <use href="#svg_meh" /></svg></label>
+    <use href="#svg_meh" /></svg></label>
 <input type="radio" name="query1" value="0" id="query10" /><label for="query10"> <svg class="red">
-        <use href="#svg_frown" /></svg></label>
+    <use href="#svg_frown" /></svg></label>
 ```
 ... for gaining opinions with a tap on a smiley, selected will be indicated by an x-mark
 
 ```html
-		<p><textarea name="text1" id="text1"
-				onfocus="initjskeyboard('text1keyboard', this);"></textarea>
-		</p>
-		<div id="text1keyboard"></div>
-		<!--this div has to have the same name as the aforedeclared class name-->
+<p><textarea name="text1" id="text1"
+    onfocus="initjskeyboard('text1keyboard', this);"></textarea>
+</p>
+<div id="text1keyboard"></div>
+<!--this div has to have the same name as the aforedeclared class name-->
 ```
 ... for entering text using a generated keyboard.
 
@@ -62,35 +62,35 @@ otherwise it's mostly just normal styling. there are some noteable functional pa
 
 ```css
 .position:nth-of-type(1n) {
-	top: calc((var(--sheet-index) - 1) * 100vh / var(--sheets));
+    top: calc((var(--sheet-index) - 1) * 100vh / var(--sheets));
 }
 
 .position {
-	scroll-snap-align: initial;
-	position: sticky;
-	position: -webkit-sticky;
-	background: lightgreen;
-	width: 1vw;
-	height: calc(100vh / var(--sheets));
-	margin-left: -1vw;
+    scroll-snap-align: initial;
+    position: sticky;
+    position: -webkit-sticky;
+    background: lightgreen;
+    width: 1vw;
+    height: calc(100vh / var(--sheets));
+    margin-left: -1vw;
 }
 ```
 these indicate the progress of the survey-form. `--sheet-index` has to be set inline while `root:--sheets` will be set with javascript on initiatization.
 
 ```css
 html {
-	scroll-snap-type: mandatory;
-	scroll-snap-points-y: repeat(100vh);
-	scroll-snap-type: y mandatory;
+    scroll-snap-type: mandatory;
+    scroll-snap-points-y: repeat(100vh);
+    scroll-snap-type: y mandatory;
     /*...*/
 }
 
 section {
-	scroll-snap-align: start;
-	height: 100vh;
-	position: relative;
-	padding: max(5vw, 10vh) 0;
-	text-align: center;
+    scroll-snap-align: start;
+    height: 100vh;
+    position: relative;
+    padding: max(5vw, 10vh) 0;
+    text-align: center;
 }
 ```
 the scroll-snapping makes the one-pager actually usable through dispaying the desired section. for the snappiest experience use firefox.
