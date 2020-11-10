@@ -50,7 +50,6 @@ section {
 }
 
 svg {
-	transform: scale(1, -1);
 	align-self: center;
 	width: 2em;
 	height: 2em;
@@ -71,7 +70,7 @@ input:checked+label::after {
 
 @media (orientation:portrait) {
 	input:checked+label[big]::after {
-		margin-top: -2em;
+		margin-top: -2.25em;
 		margin-left: .4em;
 		font-size: 4em;
 	}
@@ -79,8 +78,8 @@ input:checked+label::after {
 
 @media (orientation:landscape) {
 	input:checked+label[big]::after {
-		margin-top: -.5em;
-		margin-left: -.35em;
+		margin-top: -.3em;
+		margin-left: -.6em;
 		font-size: 4em;
 	}
 }
@@ -118,18 +117,19 @@ input:checked+label::after {
 	width: 6em;
 	height: 6em;
 	display: block;
-	margin: 0 auto;
 }
 
 @media (orientation:portrait) {
 	.big {
-		display: block
+		display: block;
+		margin: 1em auto;
 	}
 }
 
 @media (orientation:landscape) {
 	.big {
-		display: inline-block
+		display: inline-block;
+		margin: 1em;
 	}
 }
 
