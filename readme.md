@@ -13,7 +13,7 @@ questions are set up directly in the index.html-file and absolutely depending on
 ---
 ## index.html
 
-the whole survey is a one-pager that has a snapping scroll effect (that works best with firefox).
+the whole survey is a one-pager that has a snapping scroll effect that works best with ~~firefox~~ different browsers obviously depending on your system; at home it is firefox, at work in fact edge. whatever.
 
 to have the effects run as intended you'll have to follow this pattern:
 ```html
@@ -112,10 +112,8 @@ functions:
 * `api.url` contains the url to be called. in case of localhost make sure to address properly to avoid cors-errors
 * `api.currentId` contains the last database id to be updated eventually during one session
 * `api.getInputs` reads all inputs and converts them to an object
-* `api.save` initiates the actual api-call if a payload is provided
-* `api.saveResult` assigns the returned entry id to api.currentId in case of successful request
+* `api.save` initiates the actual api-call if a payload is provided and assigns the returned entry id to api.currentId in case of successful request
 * `api.delete` initiates the DELETE request to clear the database, asks for confirmation
-* `api.deleteResult` feedback in case of success
 * `api.errors` displays an error in case of unsuccessful request
 * `initjskeyboard` initiates and assigns the jskeyboard-class to an input
 * `class jskeyboard` creates a keyboard for the linked input/textarea to avoid having to use the native keyboard that does not neccessarily complies with any frame around the device
@@ -131,7 +129,7 @@ my personal usecase framework of recurring functions i tend to include in any of
 * `Array.prototype.contains` and `String.prototype.contains` calls _.contains() for intuitive use. like .includes() but with wider use
 * `_.el(elementId)` returns the element by id, just a shortcut
 * `_.contains(obj, values)` checks whether *obj* of type string or array contains at least one occurence of *values* of type string or array
-* `_.ajax.request(method, destination, payload)` where *method* is POST or GET, *destination* the url to be called and *payload* always an object with parameters to submit, that will be converted to url-paramteters in case of GET-request
+* `_.api(method, destination, payload)` where *method* is POST, PUT, DELETE or GET, *destination* the url to be called and *payload* always an object with parameters to submit, that will be converted to url-paramteters in case of GET-request
 * `_.insertChars()` is not used in this project but alike embedded in the jskeyboard class
 * `-.dragNdrop` not used in this project but handles html5 drag and drop events
 
@@ -151,7 +149,7 @@ other than that the api just checks for the request method and does the database
 
 this can be called with the parameter `type` and the following values:
 
-* *rtf* for a rich-text-formatted summary of the survey, including statistics, images, averages and comments
+* *rtf* for a rich-text-formatted summary of the survey, including statistics, images, averages and comments. note that embedded images may throw a security warning on opening
 * *csv* for a processable table of raw data for several uses
 * *sql* for a sql-database backup including DROP TABLE and CREATE TABLE
 
@@ -179,3 +177,7 @@ in this scenario customization does not take place on only one site (admin-inter
 * styling in css
 * behaviour in javascript
 * database interaction and dynamic file generation within php
+
+environment variables (paths) have to be set in:
+* scripts.js
+* dbconnect.php
