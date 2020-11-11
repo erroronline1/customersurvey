@@ -199,6 +199,7 @@ window.addEventListener('scroll', event => {
 	if (global.report == undefined) {
 		window.clearTimeout(scrollHandler);
 		scrollHandler = setTimeout(() => {
+			_.el('recommend').style.display= _.el('general2').checked?'block':'none';
 			api.save();
 		}, 512); // less than that results in more than one requests messing up the database and id-handling
 	}
