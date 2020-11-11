@@ -34,18 +34,21 @@ let api = {
 		});
 		return payload;
 	},
-	save: function () { // process inputs and textareas and transfer to api by ajax-call
+	save: async function () { // process inputs and textareas and transfer to api
 		// make server request and await result
 		let payload = this.getInputs();
 		if (Object.keys(payload).length) {
 			let method = (this.currentId !== null) ? 'PUT' : 'POST';
-			_.ajax.request(method, api.url, payload).then(api.saveResult, api.error);
+			_.api(method, api.url, payload)
+				.then(data => {
+					api.currentId = data;
+					console.log('current id: ' + api.currentId);
+				})
+				.catch(error => {
+					this.error(error);
+				});
 			console.log(method + ' request sent', Date.now());
-		}
-	},
-	saveResult: function (payload) {
-		api.currentId = payload; // this.currentId doesn't work, maybe because this is used as a callback function?
-		console.log('current id: ' + api.currentId);
+			}
 	},
 	delete: function () {
 		let confirm = prompt('enter confirmation to permanently delete all entries: ');
@@ -54,15 +57,18 @@ let api = {
 				payload = {
 					'confirm': confirm
 				};
-			_.ajax.request(method, api.url, payload).then(api.deleteResult, api.error);
+			_.api(method, api.url, payload)
+				.then(data => {
+					growlNotif('table was successfully erased');
+				})
+				.catch(error => {
+					this.error(error);
+				});
 			console.log(method + ' request sent', Date.now());
 		}
 	},
-	deleteResult: function (payload) {
-		growlNotif('table was successfully erased');
-	},
 	error: function (error) {
-		growlNotif('ajax error, server responded: ' + error);
+		growlNotif(error);
 	}
 }
 
@@ -205,11 +211,10 @@ function init(report) {
 	if (global.restart && global.report == undefined) restart();
 }
 
-function growlNotif (text) { // short popups for status information
+function growlNotif(text) { // short popups for status information
 	if (typeof text !== 'undefined') {
 		_.el('growlNotif').innerHTML = text;
 		_.el('growlNotif').classList.add('show');
 		window.setTimeout(growlNotif, 3000);
-	}
-	else _.el('growlNotif').classList.remove('show');
+	} else _.el('growlNotif').classList.remove('show');
 }

@@ -17,28 +17,29 @@ const _ = {
 			values.some(value => obj.includes(value)) :
 			obj.includes(values);
 	},
-	ajax: { // use like _.ajax.request('GET'||'POST', 'ajax.php', {object}).then(callbackfunction,errorhandler);
-		xhr: new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP"),
-		request: function (method, destination, payload) {
-			var promiseObj = new Promise(function (resolve, reject) {
-				method = method.toUpperCase();
-				let query = '';
-				if (method == 'GET') {
-					Object.keys(payload).forEach(key => {
-						query += '&' + key + '=' + payload[key];
-					});
-				}
-				_.ajax.xhr.open(method, destination + '?cache=' + Math.round(Math.random() * 100000 + 1) + query, true);
-				_.ajax.xhr.send(method == 'GET' ? null : JSON.stringify(payload));
-				_.ajax.xhr.onreadystatechange = function () {
-					if (this.readyState === 4) {
-						if (this.status === 200) resolve(this.responseText);
-						else reject(this.status);
-					}
-				};
-			});
-			return promiseObj;
-		},
+	api: async function (method, destination, payload) {
+		method = method.toUpperCase();
+		let query = '';
+		if (method == 'GET') {
+			query = '?',
+				Object.keys(payload).forEach(key => {
+					query += '&' + key + '=' + payload[key];
+				});
+		}
+		const response = await fetch(destination + query, {
+			method: method, // *GET, POST, PUT, DELETE, etc.
+			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+			body: (method == 'GET' ? null : JSON.stringify(payload)) // body data type must match "Content-Type" header
+		}).then(response => {
+			if (response.ok) return response.json();
+			else throw new Error('server error, response ' + response.status);
+		});
+		return response;
+		/* use like 
+			_.api.call(method, url, payload-object)
+				.then(data => { do something with data })
+				.catch((error) => { do something with error });
+		*/
 	},
 	insertChars: function (characters, input) { // fills or deletes text on cursor position (textareas or inputs) 
 		let el = document.getElementById(input)

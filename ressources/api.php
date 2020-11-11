@@ -44,7 +44,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT'){
 elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 	if ($payload->confirm == CONFIRM_DELETION) {
 		$mysqli->query('TRUNCATE TABLE ' . DB['table']);
-		echo null;
+		echo 1;
 	}
 	else echo http_response_code(401);
 }
