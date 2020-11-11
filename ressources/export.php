@@ -64,7 +64,7 @@ elseif ($_GET['type'] == 'rtf'){
 	$output .="{\b Kundenzufriedenheitsanalyse basierend auf den Angaben von " . substr($total['from'], 0, 10) . " bis " . substr($total['to'], 0, 10) . "} \par {\b Gesamteinschätzung:} "
 			. "\line Von " . substr($total['from'], 0, 10) . " bis " . substr($total['to'], 0, 10) . " ergeben " . $total['count'] . " allgemeine Bewertungen eine Zufriedenheit von " . round($total['avg']*50, 2) . " %. \par ";
 
-	$img = bin2hex(file_get_contents('http://localhost/customersurvey/ressources/statistics.php'));
+	$img = bin2hex(file_get_contents(ROOTDIR . 'ressources/statistics.php'));
 	$output .= "\par {\pict\pngblip\picw" . PERIOD * 10 ."\pich" . 300 * 10 . "\picwgoal" . PERIOD * 10 . "\pichgoal" . 300 * 10 . "\bin " . $img . "} \line \par";
 
 	// topic related statistics
@@ -79,7 +79,7 @@ elseif ($_GET['type'] == 'rtf'){
 			$output .= "\par In der Fragestellung {\i " . DB['fields'][$topic] . "} "
 					. "\line Von " . substr($total['from'], 0, 10) . " bis " . substr($total['to'], 0, 10) . " ergeben " . $total['count'] . " abgegebene Bewertungen eine Zufriedenheit von " . round($total['avg']*50, 2) . " %. \par ";
 
-		$img = bin2hex(file_get_contents('http://localhost/customersurvey/ressources/statistics.php?field=' . DB['fields'][$topic]));
+		$img = bin2hex(file_get_contents(ROOTDIR . 'ressources/statistics.php?field=' . DB['fields'][$topic]));
 		$output .= "\par {\pict\pngblip\picw" . PERIOD * 10 ."\pich" . 300 * 10 . "\picwgoal" . PERIOD * 10 . "\pichgoal" . 300 * 10 . "\bin " . $img . "} \line \par";
 	}
 		else $output .= "{\i " . DB['fields'][$topic] . "} wurde noch nicht beantwortet \line ";

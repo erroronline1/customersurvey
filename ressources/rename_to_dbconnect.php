@@ -11,6 +11,7 @@ const DB = [
 	]
 ];
 
+const ROOTDIR = 'http://localhost/customersurvey/';
 const PERIOD = 365 * 2;
 const CONFIRM_DELETION = '**********';
 $mysqli = mysqli_connect(DB['server'], DB['user'], DB['password'], DB['name']); if (mysqli_connect_errno($mysqli)) echo "Failed to connect to MySQL: ".mysqli_connect_error();
