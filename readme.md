@@ -8,7 +8,7 @@ a previous version had a backend to add or change questions, timings and other e
 there are some legacy remainders within this project. the earlier version had html, js and php all mixed up. database-column-names are based on the previous setup though. don't mind that.
 so this is by all means not an all purpose solution, more an accomodation to actual needs as well as one of my first attempts to gain best practices and wisely separate the functional groups into frontend, functional js and database api with clearly structured responses instead of returning evaluation js-commands parsing html with a lot of escaped quotes.
 
-questions are set up directly in the index.html-file and absolutely depending on the database-structure. so if you want to adapt this please make it properly.
+questions are set up directly in the index.html-file and absolutely depending on the database-structure. so if you want to adapt this please make it properly (who am i kidding?).
 
 ---
 ## index.html
@@ -114,7 +114,7 @@ functions:
 * `api.getInputs` reads all inputs and converts them to an object
 * `api.save` initiates the actual api-call if a payload is provided and assigns the returned entry id to api.currentId in case of successful request
 * `api.delete` initiates the DELETE request to clear the database, asks for confirmation
-* `api.errors` displays an error in case of unsuccessful request
+* `api.error` displays an error in case of unsuccessful request
 * `initjskeyboard` initiates and assigns the jskeyboard-class to an input
 * `class jskeyboard` creates a keyboard for the linked input/textarea to avoid having to use the native keyboard that does not neccessarily complies with any frame around the device
 * `function restart()` initiates or resets the timeout to reload the entire survey depending on detected interaction
