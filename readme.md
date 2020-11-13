@@ -51,7 +51,14 @@ direct supported items for the content are:
 ```
 ... for entering text using a generated keyboard.
 
-finally there is a svg-sprite and the init()-call.
+finally there is an init()-call to set styling and start timeouts .
+
+---
+## report.html
+
+the basic structure is the same as the survey itself. report contains the controls for exporting and deleting entries. please note that the possibility to delete single entries refers to possible test entries during setup.
+
+the init()-call is passed a parameter to avoid timeouts and reloads and to initiate the display of current entries.
 
 ---
 ## style.css
