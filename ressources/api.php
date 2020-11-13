@@ -35,7 +35,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT'){
 	foreach($legacy_translate as $key=>$value){
 		$update .= ', ' . $key . '="' . $value . '"';
 	}
-	$mysqli->query('UPDATE ' . DB['table'] . ' SET ' . substr($update, 2) . ' WHERE id=' . $payload->id);
+	$mysqli->query('UPDATE ' . DB['table'] . ' SET ' . substr($update, 2) . ' WHERE ' . DB['fields'][0] . '=' . $payload->id);
 	
 	//return current row-id
 	echo $payload->id ? : null;
@@ -43,12 +43,26 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT'){
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 	if ($payload->confirm == CONFIRM_DELETION) {
-		$mysqli->query('TRUNCATE TABLE ' . DB['table']);
+		// delete test entries if ids are provided
+		if ($payload->selection) $mysqli->query('DELETE FROM ' . DB['table'] . ' WHERE ' . DB['fields'][0] . ' IN (' . implode(',', $payload->selection) . ')');
+		// clear table to reset query timespan
+		else $mysqli->query('TRUNCATE TABLE ' . DB['table']);
 		echo 1;
 	}
 	else echo http_response_code(401);
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'GET'){
+	//display within report with deletion option?
+	$payload = [];
+	$q_entry = $mysqli->query('SELECT * FROM ' . DB['table'] . ' ORDER BY ' . DB['fields'][0] . ' DESC');
+	while ($entry = $q_entry->fetch_assoc()){
+		$item=[];
+		foreach ($entry as $key => $value){
+			$item[$key] = $value;
+		}
+		array_push($payload, $item);
+	}
+	echo json_encode($payload);
 }
 
 ?>

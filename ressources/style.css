@@ -201,6 +201,19 @@ textarea {
 	height: 5em;
 }
 
+#report {
+	height: 75%;
+	max-height: calc(75% - var(--global-margin-bottom));
+	overflow: auto;
+	border: 1px solid lightgray;
+	margin:.5em;
+}
+#report>div{
+	font-size:.75em;
+	text-align: left;
+	margin-bottom: 1em;
+}
+
 input[type=radio] {
 	display: none
 }
@@ -210,14 +223,15 @@ input[type=radio] {
 	background-color: dimgrey;
 	color: white;
 	box-shadow: .1em .1em .3em 0em grey;
-	position:fixed;
-	z-index:2;
+	position: fixed;
+	z-index: 2;
 	font-size: 1rem;
-	padding:1em;
-	width:15em;
-	bottom:	var(--global-margin-bottom);
+	padding: 1em;
+	width: 15em;
+	bottom: var(--global-margin-bottom);
 	right: calc(-1 * (15em + var(--global-margin-right)));
 }
-#growlNotif.show{
-	right:	var(--global-margin-right);
+
+#growlNotif.show {
+	right: var(--global-margin-right);
 }

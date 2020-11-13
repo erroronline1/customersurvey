@@ -34,6 +34,38 @@ let api = {
 		});
 		return payload;
 	},
+	getSelected: function () {
+		let payload = [];
+		// input radio button handler	
+		let inputs = document.getElementsByTagName('input');
+		Object.keys(inputs).forEach(element => {
+			if (inputs[element].checked) {
+				payload.push(inputs[element].value);
+			}
+		});
+		return payload;
+	},
+	show: async function (displaytarget) {
+		let method = 'get',
+			payload = {};
+		_.api(method, api.url, payload)
+			.then(data => {
+				let output = '';
+				data.forEach(item => {
+					output += '<div>'
+					Object.keys(item).forEach(key => {
+						if (key == 'id') output += '<em>' + key + ':</em> ' + item[key] + ' | löschen: <input type="checkbox" value="' + item['id'] + '" /><br />';
+						else if (item[key]) output += '<em>' + key + ':</em> ' + item[key] + ' | ';
+					});
+					output += '</div>';
+				});
+				_.el(displaytarget).innerHTML = output;
+			})
+			.catch(error => {
+				this.error(error);
+			});
+		console.log(method + ' request sent', Date.now());
+	},
 	save: async function () { // process inputs and textareas and transfer to api
 		// make server request and await result
 		let payload = this.getInputs();
@@ -48,18 +80,22 @@ let api = {
 					this.error(error);
 				});
 			console.log(method + ' request sent', Date.now());
-			}
+		}
 	},
-	delete: function () {
-		let confirm = prompt('enter confirmation to permanently delete all entries: ');
+	delete: async function (what) {
+		let method = 'DELETE',
+			payload = {},
+			confirm = null;
+		if (what == 'all') confirm = prompt('enter confirmation to permanently delete all entries: ');
+		else {
+			payload['selection'] = this.getSelected();
+			if (payload['selection'].length) confirm = prompt('enter confirmation to permanently delete ' + payload['selection'].length + ' selected entries: ');
+		}
 		if (confirm !== null) {
-			let method = 'DELETE',
-				payload = {
-					'confirm': confirm
-				};
+			payload['confirm'] = confirm;
 			_.api(method, api.url, payload)
 				.then(data => {
-					growlNotif('table was successfully erased');
+					growlNotif(what == 'all' ? 'table was successfully erased' : 'entries were sucessfully deleted, you may have to reload.');
 				})
 				.catch(error => {
 					this.error(error);
@@ -199,7 +235,7 @@ window.addEventListener('scroll', event => {
 	if (global.report == undefined) {
 		window.clearTimeout(scrollHandler);
 		scrollHandler = setTimeout(() => {
-			_.el('recommend').style.display= _.el('general2').checked?'block':'none';
+			_.el('recommend').style.display = _.el('general2').checked ? 'block' : 'none';
 			api.save();
 		}, 512); // less than that results in more than one requests messing up the database and id-handling
 	}
@@ -210,6 +246,7 @@ function init(report) {
 	global.sheets = Object.keys(document.getElementsByTagName('section')).length;
 	document.documentElement.style.setProperty('--sheets', global.sheets - 1);
 	if (global.restart && global.report == undefined) restart();
+	if (global.report) api.show('report');
 }
 
 function growlNotif(text) { // short popups for status information

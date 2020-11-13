@@ -24,13 +24,28 @@
 					<use href="ressources/sprite.svg#svg_database"></use>
 				</svg> SQL-Datei des Systems anfordern (Datenbank-Backup)</a><br />
 		</p>
+
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="ressources/sprite.svg#svg_navigation" /></svg>
 	</section>
 	<div class="position" style="--sheet-index:1;"></div>
 	<section>
+		<h1>Entries</h1>
+		<p id="report">
+		</p>
+		<div class="button" onclick="api.delete(); api.show('report')"><svg>
+			<use href="ressources/sprite.svg#svg_bin"></use>
+		</svg> gewählte Einträge unwiderruflich löschen</div>
+
+		<svg class="nav_up grey" onclick="jump(-1)">
+			<use href="ressources/sprite.svg#svg_navigation" /></svg>
+		<svg class="nav_down grey" onclick="jump(1)">
+			<use href="ressources/sprite.svg#svg_navigation" /></svg>
+	</section>
+	<div class="position" style="--sheet-index:2;"></div>
+	<section>
 		<h1>Reset Database</h1>
-		<div class="button" onclick="api.delete()"><svg>
+		<div class="button" onclick="api.delete('all')"><svg>
 				<use href="ressources/sprite.svg#svg_bin"></use>
 			</svg> Datenbank unwiderruflich löschen</div>
 
@@ -39,7 +54,7 @@
 		<svg class="nav_down grey" onclick="jump(1)">
 			<use href="ressources/sprite.svg#svg_navigation" /></svg>
 	</section>
-	<div class="position" style="--sheet-index:2;"></div>
+	<div class="position" style="--sheet-index:3;"></div>
 	<section>
 		<h1>Info</h1>
 		<p>customer survey by error on line 1 (erroronline.one)<br />

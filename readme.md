@@ -111,9 +111,11 @@ functions:
 * `function jump(steps)` scrolls to relative sheet 
 * `api.url` contains the url to be called. in case of localhost make sure to address properly to avoid cors-errors
 * `api.currentId` contains the last database id to be updated eventually during one session
-* `api.getInputs` reads all inputs and converts them to an object
+* `api.getInputs` reads all inputs and converts them to an object assigned with input name. considers radiobuttons and textareas for use in survey
+* `api.getSelected` reads all checked inputs and converts them to an array for use in report
+* `api.show` shows all entries
 * `api.save` initiates the actual api-call if a payload is provided and assigns the returned entry id to api.currentId in case of successful request
-* `api.delete` initiates the DELETE request to clear the database, asks for confirmation
+* `api.delete` initiates the DELETE request to clear the database or selected entries, asks for confirmation
 * `api.error` displays an error in case of unsuccessful request
 * `initjskeyboard` initiates and assigns the jskeyboard-class to an input
 * `class jskeyboard` creates a keyboard for the linked input/textarea to avoid having to use the native keyboard that does not neccessarily complies with any frame around the device
@@ -142,7 +144,8 @@ other than that the api just checks for the request method and does the database
 
 * `POST` to insert a new row to the database, returning the insertId
 * `PUT` to update the current row according to the previous fetched insertId
-* `DELETE` to clear (truncate) the database in this case
+* `DELETE` to clear (truncate) the database or given entries based on passed array of ids
+* `GET` to return all entries as a processable object
 
 ---
 ## export.php
