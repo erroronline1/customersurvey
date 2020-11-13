@@ -54,7 +54,7 @@ let api = {
 				data.forEach(item => {
 					output += '<div>'
 					Object.keys(item).forEach(key => {
-						if (key == 'id') output += '<em>' + key + ':</em> ' + item[key] + ' | löschen: <input type="checkbox" value="' + item['id'] + '" /><br />';
+						if (key == 'id') output += '<em>' + key + ':</em> ' + item[key] + ' | delete: <input type="checkbox" value="' + item['id'] + '" /><br />';
 						else if (item[key]) output += '<em>' + key + ':</em> ' + item[key] + ' | ';
 					});
 					output += '</div>';
