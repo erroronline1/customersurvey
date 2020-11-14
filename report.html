@@ -16,13 +16,13 @@
 		<p>
 			<a href="ressources/export.php?type=rtf" target="dump"><svg>
 					<use href="ressources/sprite.svg#svg_document"></use>
-				</svg> RTF-Bericht</a>
+				</svg> RTF report with graphs</a>
 			<a href="ressources/export.php?type=csv" target="dump"><svg>
 					<use href="ressources/sprite.svg#svg_table"></use>
-				</svg> CSV-Datei der Befragung anfordern</a>
+				</svg> CSV file with raw data</a>
 			<a href="ressources/export.php?type=sql" target="dump"><svg>
 					<use href="ressources/sprite.svg#svg_database"></use>
-				</svg> SQL-Datei des Systems anfordern (Datenbank-Backup)</a><br />
+				</svg> SQL file (database backup)</a><br />
 		</p>
 
 		<svg class="nav_down grey" onclick="jump(1)">
@@ -35,7 +35,7 @@
 		</p>
 		<div class="button" onclick="api.delete(); api.show('report')"><svg>
 			<use href="ressources/sprite.svg#svg_bin"></use>
-		</svg> gewählte Einträge unwiderruflich löschen</div>
+		</svg> delete selected entries</div>
 
 		<svg class="nav_up grey" onclick="jump(-1)">
 			<use href="ressources/sprite.svg#svg_navigation" /></svg>
@@ -47,7 +47,7 @@
 		<h1>Reset Database</h1>
 		<div class="button" onclick="api.delete('all')"><svg>
 				<use href="ressources/sprite.svg#svg_bin"></use>
-			</svg> Datenbank unwiderruflich löschen</div>
+			</svg> reset database</div>
 
 		<svg class="nav_up grey" onclick="jump(-1)">
 			<use href="ressources/sprite.svg#svg_navigation" /></svg>
