@@ -40,7 +40,7 @@ direct supported items for the content are:
 <input type="radio" name="query1" value="0" id="query10" /><label for="query10"> <svg class="red">
     <use href="#svg_frown" /></svg></label>
 ```
-... for gaining opinions with a tap on a smiley, selected will be indicated by an x-mark
+... for gaining opinions with a tap on a smiley, selected will be indicated by an x-mark. more than 3 questions in one section won't fit in landscape mode with current stylings.
 
 ```html
 <p><textarea name="text1" id="text1"

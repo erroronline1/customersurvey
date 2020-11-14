@@ -124,6 +124,9 @@ input:checked+label::after {
 		display: block;
 		margin: 1em auto;
 	}
+	#recommend {text-align: center;}
+	#recommend>svg {display:block; margin:1em auto;}
+
 }
 
 @media (orientation:landscape) {

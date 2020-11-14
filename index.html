@@ -90,8 +90,7 @@
 	<div class="position" style="--sheet-index:3;"></div>
 	<section>
 		<h1>Was hat Ihnen gefallen?</h1>
-		<p><textarea name="text1" id="text1"
-				onfocus="initjskeyboard('text1keyboard', this);"></textarea>
+		<p><textarea name="text1" id="text1" onfocus="initjskeyboard('text1keyboard', this);"></textarea>
 		</p>
 		<div id="text1keyboard"></div>
 		<!--this div has to have the same name as the aforedeclared class name-->
@@ -104,8 +103,7 @@
 	<div class="position" style="--sheet-index:4;"></div>
 	<section>
 		<h1>Was können wir besser machen?</h1>
-		<p><textarea name="text2" id="text2"
-				onfocus="initjskeyboard('text2keyboard', this);"></textarea>
+		<p><textarea name="text2" id="text2" onfocus="initjskeyboard('text2keyboard', this);"></textarea>
 		</p>
 		<div id="text2keyboard"></div>
 		<!--this div has to have the same name as the aforedeclared class name-->
@@ -118,8 +116,7 @@
 	<div class="position" style="--sheet-index:5;"></div>
 	<section>
 		<h1>Welches Hilfsmittel haben Sie von uns erhalten?</h1>
-		<p><textarea name="text3" id="text3"
-				onfocus="initjskeyboard('text3keyboard', this);"></textarea>
+		<p><textarea name="text3" id="text3" onfocus="initjskeyboard('text3keyboard', this);"></textarea>
 		</p>
 		<div id="text3keyboard"></div>
 		<!--this div has to have the same name as the aforedeclared class name-->
@@ -137,16 +134,17 @@
 
 		<p id="recommend"><br />
 			<svg>
-				<use href="ressources/sprite.svg#svg_recommend" /></svg><br /><br />
-				Wenn Sie zufrieden sind empfehlen Sie uns gerne weiter!<br /><br />
-				<svg>
-					<use href="ressources/sprite.svg#svg_smile" /></svg>
-			</p>
+				<use href="ressources/sprite.svg#svg_recommend" /></svg>
+			Wenn Sie zufrieden sind empfehlen Sie uns gerne weiter!
+			<svg>
+				<use href="ressources/sprite.svg#svg_smile" /></svg>
+		</p>
 
 		<svg class="nav_up grey" onclick="jump(-1)">
 			<use href="ressources/sprite.svg#svg_navigation" /></svg>
 		<svg class="nav_down grey" onclick="window.setTimeout(()=>{window.location.href=location.href;},1000)">
-			<use href="ressources/sprite.svg#svg_reload" /></svg><!-- 1s timeout to make sure saving possible entries -->
+			<use href="ressources/sprite.svg#svg_reload" /></svg>
+		<!-- 1s timeout to make sure saving possible entries -->
 	</section>
 	<!-- 
 		adding sections has to follow the same scheme
