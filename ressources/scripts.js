@@ -150,7 +150,7 @@ class jskeyboard { // construct a keyboard and handle key-presses
 		svg.setAttribute('id', parent.id + 'shiftkey');
 		key.appendChild(svg);
 		key.onclick = function () {
-			eval(parent.id + '.shift=true; this.classList.add(\'activeshiftkey\')');
+			eval(parent.id + '.shift=' + parent.id + '.shift==true ? false : true; this.classList.toggle(\'activeshiftkey\')');
 		};
 		keyrow.appendChild(key);
 
