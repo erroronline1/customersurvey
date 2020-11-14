@@ -177,6 +177,7 @@ this file creates image streams to depict the votes in a graph with daily and ov
 
 the database-parameters are set here, database connection is initiated and a few constants are declared for customization. this file is included in every other php-file.
 
+if the expected table is not found it will be created. note that the third field for general opinion is `int(11) NOT NULL` and entries to the survey will not be stored if the general opinion is not selected - due to an sql-error for not being able to store an empty value. this is purposefully but if you want it otherwise install the field as `tinytext CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL`. inputs will be processed by javascript as (occasionally empty) strings anyway and type safety is not considered critical in this usecase - using dynamically types languages only, the report is still able to calculate everything properly. 
 
 # summary
 
